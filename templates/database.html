@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block content %}
+<div class="page-heading"><h1>数据库配置</h1><a href="{{ url_for('platform_settings') }}">平台设置</a></div>
+<form method="post" class="panel stack">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<p>当前存储：{{ 'PostgreSQL（PQ）' if postgresql else 'SQLite' }}。填写目标连接后可初始化空库；已有数据保留，不自动复制历史数据。数据库及数据库用户须事先创建。</p>
+{% for key,label in [('host','数据库地址'),('port','端口'),('database','数据库名称'),('user','用户名')] %}<label>{{ label }}<input name="{{ key }}" value="{{ values[key] }}" required></label>{% endfor %}
+<label>连接密码（同一连接留空保留）<span class="actions"><input name="password" id="db-password" type="password" autocomplete="new-password"><button type="button" class="button secondary" id="db-eye" aria-label="显示密码">◉</button></span></label>
+<label>SSL 模式<select name="sslmode">{% for mode in ['disable','prefer','require','verify-ca','verify-full'] %}<option {% if values.sslmode==mode %}selected{% endif %}>{{ mode }}</option>{% endfor %}</select></label>
+<div class="actions"><button class="button secondary" name="action" value="test">测试连接</button><button class="button secondary" name="action" value="initialize">初始化数据库</button><button class="button" name="action" value="save">保存配置（重启生效）</button></div>
+<p>空库初始化时使用当前管理员的用户名和密码创建管理员账号。已存在的用户和密码不会被修改。文章、评论、图片和签名密钥需另行迁移。</p>
+</form>{% endblock %}{% block scripts %}<script src="{{ url_for('static',filename='database.js') }}" defer></script>{% endblock %}

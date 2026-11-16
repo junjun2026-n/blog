@@ -1,0 +1,11 @@
+{% extends 'base.html' %}{% block content %}
+<div class="page-heading"><div><span class="eyebrow">PLATFORM SETTINGS</span><h1>平台设置</h1></div><a href="{{ url_for('database_settings') }}">数据库配置</a><a href="{{ url_for('admin') }}">← 管理后台</a></div>
+<form method="post" class="panel stack branding-form" id="branding-form">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<label>平台名称<input name="platform_name" required maxlength="40" value="{{ request.form.get('platform_name',platform_name) }}" placeholder="请输入平台名称"></label>
+<div><label>平台 LOGO</label><div class="logo-settings"><img id="logo-preview" class="logo-preview" src="{{ request.form.get('platform_logo',platform_logo) }}" alt="LOGO 预览" {% if not request.form.get('platform_logo',platform_logo) %}hidden{% endif %}><label class="button secondary small">选择图片<input type="file" id="logo-file" accept="image/png,image/jpeg,image/webp,image/gif" hidden></label><span class="muted">支持 PNG、JPG、WebP、GIF，最多 5MB，建议使用透明背景方形图片。</span></div></div>
+<input type="hidden" name="platform_logo" value="{{ request.form.get('platform_logo',platform_logo) }}">
+<label class="check"><input type="checkbox" name="remove_logo">恢复默认图标</label>
+<p class="muted" id="logo-status" role="status">保存后同步更新所有页面的名称与 LOGO；GIF 仅保留首帧。</p>
+<div class="actions"><button class="button" id="save-branding">保存设置</button></div>
+</form>{% endblock %}{% block scripts %}<script src="{{ url_for('static',filename='branding.js') }}" defer></script>{% endblock %}
