@@ -1,3 +1,14 @@
+// ============================================================
+// 文件名称：app.js
+// 生成日期：2026-11-11
+// 修改日期：2026-11-20
+// 版本信息：v0.261115
+// 作    者：JUN
+// 备    注：本程序由AI辅助完成。
+//           文件功能：组织应用界面或应用服务逻辑。
+//           文件用途：供博客的 BLOG/static/app.js 模块使用。
+//           注意事项：运行前检查依赖与配置；涉及数据或服务变更时先备份并验证。
+// ============================================================
 document.querySelectorAll('[data-confirm]').forEach(form => form.addEventListener('submit', e => {
   if (!window.confirm(form.dataset.confirm)) e.preventDefault();
 }));

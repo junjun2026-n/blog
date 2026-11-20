@@ -1,1 +1,14 @@
+<!--
+============================================================
+文件名称：mine.html
+生成日期：2026-11-11
+修改日期：2026-11-20
+版本信息：v0.261115
+作    者：JUN
+备    注：本程序由AI辅助完成。
+          文件功能：定义 mine 页面结构或界面资源。
+          文件用途：供博客的 BLOG/templates/mine.html 模块使用。
+          注意事项：运行前检查依赖与配置；涉及数据或服务变更时先备份并验证。
+============================================================
+-->
 {% extends 'base.html' %}{% block content %}<div class="page-heading"><div><span class="eyebrow">MY STORIES</span><h1>我的文章</h1></div><a class="button" href="{{ url_for('edit') }}">＋ 写文章</a></div><div class="panel table-wrap"><table><thead><tr><th>文章标题</th><th>分类</th><th>状态</th><th>评论</th><th>发布时间</th><th>操作</th></tr></thead><tbody>{% for p in posts %}<tr><td><a href="{{ url_for('detail',post_id=p.id) }}">{{ p.title }}</a></td><td>{{ p.category }}</td><td>{{ '已发布' if p.published else '草稿' }}</td><td>{{ '开放' if p.comments_open else '已关闭' }}</td><td>{{ p.created_at[:10] }}</td><td><div class="actions"><a href="{{ url_for('edit',post_id=p.id) }}">编辑</a><form method="post" action="{{ url_for('delete_post',post_id=p.id) }}" data-confirm="确定删除文章及全部评论？"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="text-button danger">删除</button></form></div></td></tr>{% else %}<tr><td colspan="6" class="muted">还没有文章，开始记录你的第一个想法吧。</td></tr>{% endfor %}</tbody></table></div>{% endblock %}

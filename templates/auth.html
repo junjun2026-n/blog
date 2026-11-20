@@ -1,1 +1,14 @@
+<!--
+============================================================
+文件名称：auth.html
+生成日期：2026-11-11
+修改日期：2026-11-20
+版本信息：v0.261115
+作    者：JUN
+备    注：本程序由AI辅助完成。
+          文件功能：定义 auth 页面结构或界面资源。
+          文件用途：供博客的 BLOG/templates/auth.html 模块使用。
+          注意事项：运行前检查依赖与配置；涉及数据或服务变更时先备份并验证。
+============================================================
+-->
 {% extends 'base.html' %}{% block content %}<section class="auth-panel panel"><span class="eyebrow">WELCOME TO {{ platform_name }}</span><h1>{{ '创建你的账户' if mode=='register' else '欢迎回来。' }}</h1><p class="muted">{{ '从一个想法开始，和世界分享你的故事。' if mode=='register' else '继续记录，继续遇见新的灵感。' }}</p><form method="post" class="stack"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><label>用户名<input name="username" required maxlength="30" autocomplete="username" value="{{ request.form.get('username','') }}"></label>{% if mode=='register' %}<label>邮箱<input type="email" name="email" required maxlength="200" autocomplete="email" value="{{ request.form.get('email','') }}"></label>{% endif %}<label>密码<span class="password-field"><input name="password" type="password" required minlength="8" maxlength="128" autocomplete="{{ 'new-password' if mode=='register' else 'current-password' }}"><button type="button" class="eye" aria-label="显示密码">◉</button></span></label>{% if mode=='register' %}<label>确认密码<input type="password" name="confirm" required minlength="8" maxlength="128" autocomplete="new-password"></label>{% endif %}<button class="button">{{ '注册账户' if mode=='register' else '登录' }} →</button></form><p class="muted">{% if mode=='register' %}已有账户？ <a href="{{ url_for('login') }}">立即登录</a>{% else %}还没有账户？ <a href="{{ url_for('register') }}">免费注册</a>{% endif %}</p></section>{% endblock %}

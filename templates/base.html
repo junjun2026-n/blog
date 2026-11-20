@@ -1,4 +1,17 @@
 <!doctype html>
+<!--
+============================================================
+文件名称：base.html
+生成日期：2026-11-11
+修改日期：2026-11-20
+版本信息：v0.261115
+作    者：JUN
+备    注：本程序由AI辅助完成。
+          文件功能：定义 base 页面结构或界面资源。
+          文件用途：供博客的 BLOG/templates/base.html 模块使用。
+          注意事项：运行前检查依赖与配置；涉及数据或服务变更时先备份并验证。
+============================================================
+-->
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{% block title %}{{ platform_name }} · 记录与分享{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"><link rel="stylesheet" href="{{ url_for('static',filename='vendor/summernote-lite.min.css') }}"><link rel="stylesheet" href="{{ url_for('static',filename='editor.css') }}"></head>
 <body><header><nav class="nav wrap"><a class="brand" href="{{ url_for('index') }}">{% if platform_logo %}<img class="platform-logo" src="{{ platform_logo }}" alt="{{ platform_name }} LOGO">{% else %}<span class="brand-icon">{{ platform_name[0]|upper }}</span>{% endif %}<span class="brand-name">{{ platform_name }}</span><span class="brand-note">文字，让想法相遇</span></a><div class="nav-links"><a href="{{ url_for('index') }}">发现</a>{% if g.user %}<a href="{{ url_for('mine') }}">我的文章</a>{% if g.user.is_admin %}<a href="{{ url_for('admin') }}">管理后台</a>{% endif %}<a href="{{ url_for('account') }}">{{ g.user.username }}</a><form action="{{ url_for('logout') }}" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="text-button">退出</button></form><a class="button small" href="{{ url_for('edit') }}">＋ 写文章</a>{% else %}<a href="{{ url_for('login') }}">登录</a><a class="button small" href="{{ url_for('register') }}">加入社区 ↗</a>{% endif %}</div></nav></header>
 <main class="wrap">{% with messages=get_flashed_messages(with_categories=true) %}{% for kind,msg in messages %}<div role="status" class="flash {{ kind }}">{{ msg }}</div>{% endfor %}{% endwith %}{% block content %}{% endblock %}</main>

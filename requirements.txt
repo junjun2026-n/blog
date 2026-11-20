@@ -7,3 +7,5 @@ pytest>=8,<10
 mammoth>=1.9,<2
 Pillow>=11,<13
 psycopg[binary]>=3.2,<4
+PyMySQL>=1.1,<2
+PyMySQL>=1.1,<2

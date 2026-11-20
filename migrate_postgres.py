@@ -1,3 +1,14 @@
+# ============================================================
+# 文件名称：migrate_postgres.py
+# 生成日期：2026-11-16
+# 修改日期：2026-11-20
+# 版本信息：v0.261115
+# 作    者：JUN
+# 备    注：本程序由AI辅助完成。
+#           文件功能：执行 migrate_postgres 对应的启动、构建或运维任务。
+#           文件用途：供博客的 BLOG/migrate_postgres.py 模块使用。
+#           注意事项：运行前检查依赖与配置；涉及数据或服务变更时先备份并验证。
+# ============================================================
 """Offline SQLite to empty PostgreSQL migration; verifies all table contents."""
 import argparse
 import hashlib
